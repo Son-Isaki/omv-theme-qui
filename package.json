@@ -1,0 +1,20 @@
+{
+    "name": "omv-theme-qui",
+    "version": "1.14.0",
+    "private": true,
+    "description": "Qui-inspired Simple Dark Interface for OpenMediaVault 8",
+    "author": {
+        "email": "",
+        "name": "Son-Isaki",
+        "url": "https://github.com/Son-Isaki/omv-theme-qui"
+    },
+    "scripts": {
+        "build": "node scripts/build.mjs",
+        "watch": "sass --watch src/omv-theme-qui.scss:dist/omv-theme-qui.css --no-source-map",
+        "patch": "npm version patch --no-git-tag-version",
+        "minor": "npm version minor --no-git-tag-version"
+    },
+    "devDependencies": {
+        "sass": "^1.93.0"
+    }
+}

@@ -1,0 +1,1667 @@
+/* MARKER */
+
+@use "variables" as *;
+@use "themes";
+
+/* Canvas + original OMV workbench layout */
+html, body, omv-root, omv-workbench-layout,
+.mat-drawer-container, .mat-drawer-content,
+.mat-sidenav-container, .mat-sidenav-content,
+#omv-workbench-router-outlet, .omv-scrollable-y {
+    background: var(--qui-bg) !important;
+    color: var(--qui-text);
+}
+body { font-family: 'Geist', 'Inter', sans-serif; }
+
+/* Qui-like sidebar: slightly lighter than content */
+#omv-workbench-navigation,
+#omv-workbench-navigation .mat-drawer-inner-container,
+#omv-workbench-navigation .omv-navigation-bar {
+    background: var(--qui-sidebar) !important;
+}
+#omv-workbench-navigation {
+    border-right: 1px solid var(--qui-border) !important;
+    box-shadow: none !important;
+}
+/* Keep OMV's logo asset and navigation behavior */
+#omv-workbench-navigation .header {
+    background: var(--qui-sidebar) !important;
+    border-bottom: 1px solid var(--qui-border);
+}
+#omv-workbench-navigation .mat-nav-list {
+    padding: 8px 8px 16px !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item {
+    border-radius: 7px !important;
+    color: var(--qui-text) !important;
+    transition: background-color .14s ease;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    box-shadow: none !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-list-item-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-icon {
+    color: var(--qui-tone-c5c5c5) !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item:hover {
+    background: var(--qui-color-selected) !important;
+}
+/* Respect OMV's own current/selected state classes; do not change click targets */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] {
+    background: var(--qui-selection) !important;
+    color: var(--qui-text) !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active .mat-icon,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected .mat-icon,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] .mat-icon {
+    color: var(--qui-color-text-soft) !important;
+}
+
+/* Active and hovered navigation: no white/gray stripe from native OMV */
+#omv-workbench-navigation omv-navigation-bar-list-item,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item:hover {
+    border-left: 0 !important;
+    border-inline-start: 0 !important;
+    box-shadow: none !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item::before,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item::after {
+    border-left: 0 !important;
+    box-shadow: none !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-list-item-content {
+    border-left: 0 !important;
+    box-shadow: none !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item:hover,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active {
+    background-color: var(--qui-selection) !important;
+}
+/* Top toolbar: actual DOM is <omv-top-bar><mat-toolbar class="omv-top-bar"> */
+omv-top-bar > mat-toolbar.omv-top-bar,
+omv-top-bar mat-toolbar.omv-top-bar,
+mat-toolbar.omv-top-bar.mat-primary {
+    background: var(--qui-bg) !important;
+    color: var(--qui-text) !important;
+    border-bottom: 1px solid var(--qui-border);
+    box-shadow: none !important;
+}
+omv-top-bar mat-toolbar.omv-top-bar .hostname {
+    color: var(--qui-muted) !important;
+}
+omv-top-bar mat-toolbar.omv-top-bar button .mat-icon {
+    color: var(--qui-color-text-soft) !important;
+}
+omv-top-bar mat-toolbar.omv-top-bar .mat-divider {
+    background: var(--qui-border) !important;
+    border-color: var(--qui-border) !important;
+}
+
+/* Breadcrumbs */
+omv-breadcrumb nav a { color: var(--qui-muted) !important; }
+omv-breadcrumb nav a.active,
+omv-breadcrumb nav a:hover { color: var(--qui-text) !important; }
+omv-breadcrumb nav a:hover:not(.active) {
+    border-bottom-color: var(--qui-tone-777) !important;
+}
+omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
+
+/* Surfaces: OMV uses pre-MDC Angular Material classes */
+.mat-card, .mat-expansion-panel,
+.mat-dialog-container, .mat-menu-panel,
+.mat-select-panel, .mat-autocomplete-panel {
+    background: var(--qui-panel) !important;
+    color: var(--qui-text) !important;
+    border: 1px solid var(--qui-border) !important;
+    border-radius: var(--qui-radius) !important;
+    box-shadow: none !important;
+}
+.mat-card-title, .mat-card-content, .mat-expansion-panel-header-title {
+    color: var(--qui-text) !important;
+}
+.mat-card-subtitle, .mat-hint, .mat-expansion-panel-header-description {
+    color: var(--qui-muted) !important;
+}
+/* The four large tiles in your Theme Kit screenshot */
+.omv-navigation-page > .mat-card,
+.omv-navigation-page .mat-card {
+    min-height: 84px;
+    transition: background-color .14s ease, border-color .14s ease;
+}
+.omv-navigation-page .mat-card:hover {
+    background: var(--qui-panel-hover) !important;
+    border-color: var(--qui-tone-3c3c3c) !important;
+}
+.omv-navigation-page .mat-card .mat-icon {
+    color: var(--qui-tone-d4d4d4) !important;
+}
+.omv-navigation-page .mat-card .omv-text-center {
+    color: var(--qui-text) !important;
+}
+
+/* Data tables and lists */
+.mat-table, table.mat-table { background: var(--qui-panel) !important; }
+.mat-header-row, .mat-header-cell {
+    background: var(--qui-color-surface-raised) !important;
+    color: var(--qui-color-text-soft) !important;
+}
+.mat-row, .mat-cell, .mat-footer-row, .mat-footer-cell {
+    background: transparent !important;
+    color: var(--qui-text) !important;
+}
+.mat-row:hover { background: var(--qui-color-row-hover) !important; }
+.mat-cell, .mat-header-cell, .mat-footer-cell,
+.mat-row, .mat-header-row, .mat-footer-row {
+    border-bottom-color: var(--qui-border) !important;
+}
+.mat-paginator { background: var(--qui-panel) !important; color: var(--qui-muted) !important; }
+.mat-divider { border-color: var(--qui-border) !important; }
+
+/* Inputs: keep focus/errors visible */
+.mat-form-field { color: var(--qui-text) !important; }
+.mat-form-field-label, .mat-select-placeholder { color: var(--qui-muted) !important; }
+.mat-input-element, .mat-select-value { color: var(--qui-text) !important; }
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background: var(--qui-tone-222) !important;
+    border-radius: 7px 7px 0 0;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: var(--qui-tone-535353) !important;
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: var(--qui-tone-c8c8c8) !important;
+}
+/* Do not override .mat-error, .mat-warn, disabled/validation colors */
+
+/* Buttons and popovers */
+.mat-button, .mat-stroked-button, .mat-flat-button,
+.mat-raised-button, .mat-menu-item {
+    border-radius: 7px !important;
+}
+.mat-stroked-button { border-color: var(--qui-color-border-control) !important; }
+.mat-raised-button { box-shadow: none !important; }
+.mat-menu-item { color: var(--qui-text) !important; }
+.mat-menu-item:hover:not([disabled]) { background: var(--qui-color-selected) !important; }
+.mat-dialog-container { padding: 24px; }
+
+/* Consistent scrollbar where supported */
+#omv-workbench-navigation, .omv-scrollable-y {
+    scrollbar-width: thin;
+    scrollbar-color: var(--qui-tone-454545) transparent;
+}
+
+/* Keyboard accessibility: always keep focus visible */
+:where(button, a, .mat-list-item, .mat-card):focus-visible {
+    outline: 2px solid var(--qui-tone-bfbfbf) !important;
+    outline-offset: 2px;
+}
+
+/* Narrow screens: preserve OMV's native responsive side drawer behavior */
+@media (max-width: 767px) {
+    .omv-navigation-page .mat-card { min-height: 72px; }
+    omv-top-bar mat-toolbar.omv-top-bar .hostname { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .omv-navigation-page .mat-card,
+    #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item {
+        transition: none !important;
+    }
+}
+
+
+/* ==============================================================
+   v1.2 — Sidebar dimensions, branding, and qui navigation states
+   OMV 8 uses pre-MDC mat-list-item and a CSS background-image logo.
+   ============================================================== */
+:root {
+    --qui-nav-width: #{$sidebar-width};
+    --qui-nav-height: #{$navigation-row-height};
+    --qui-nav-active: var(--qui-color-text-soft);
+    --qui-nav-hover: var(--qui-color-hover);
+}
+
+/* Match qui's 255px sidebar; override OMV's native 18.75rem. */
+#omv-workbench-navigation,
+#omv-workbench-navigation .mat-drawer-inner-container,
+#omv-workbench-navigation omv-navigation-bar,
+#omv-workbench-navigation .omv-navigation-bar {
+    width: var(--qui-nav-width) !important;
+    min-width: var(--qui-nav-width) !important;
+    max-width: var(--qui-nav-width) !important;
+    box-sizing: border-box !important;
+}
+
+/* Branding: logo smaller, generous and symmetric padding. */
+#omv-workbench-navigation .omv-navigation-bar > mat-toolbar.header {
+    box-sizing: border-box !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    padding: 0 21px !important;
+    border-left: 0 !important;
+    border-bottom: 1px solid var(--qui-border) !important;
+}
+#omv-workbench-navigation .omv-navigation-bar > .header .logo {
+    width: 100% !important;
+    height: 29px !important;
+    background-position: left center !important;
+    background-size: contain !important;
+}
+
+/* Navigation: 36px rows, small insets like qui's sidebar. */
+#omv-workbench-navigation .mat-nav-list {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 8px 10px 14px !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: var(--qui-nav-height) !important;
+    min-height: var(--qui-nav-height) !important;
+    margin: 2px 0 !important;
+    border: none !important;
+    border-inline-start: 0 !important;
+    border-radius: 7px !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    color: var(--qui-color-text-near-white) !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-list-item-content {
+    padding: 0 10px !important;
+    gap: 0 !important;
+    height: 100% !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-icon {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 18px !important;
+    margin-right: 10px !important;
+    flex: 0 0 18px;
+    color: var(--qui-tone-d7d7d7) !important;
+}
+/* Arrow icons at the far right should not have left-item spacing. */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .omv-flex-row > .mat-icon {
+    margin: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .omv-text-truncate {
+    font-size: 13px !important;
+    line-height: 18px !important;
+}
+
+/* Each level adds only 15px rather than native 32px. */
+#omv-workbench-navigation .omv-list-item-indent-z1 { width: 15px !important; flex: 0 0 15px !important; }
+#omv-workbench-navigation .omv-list-item-indent-z2 { width: 30px !important; flex: 0 0 30px !important; }
+#omv-workbench-navigation .omv-list-item-indent-z3 { width: 45px !important; flex: 0 0 45px !important; }
+#omv-workbench-navigation .omv-list-item-indent-z4 { width: 60px !important; flex: 0 0 60px !important; }
+
+/* Hover: charcoal pill. Active takes precedence over hover. */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item:not(.active):not(.selected):hover {
+    background: var(--qui-nav-hover) !important;
+    color: var(--qui-color-white-short) !important;
+}
+
+/* Active: light pill with near-black text and icons, as on qui. */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] {
+    background: var(--qui-nav-active) !important;
+    color: var(--qui-color-sidebar) !important;
+    border: 0 !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active .omv-text-truncate,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected .omv-text-truncate,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] .omv-text-truncate {
+    color: var(--qui-color-sidebar) !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active .mat-icon,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected .mat-icon,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] .mat-icon {
+    color: var(--qui-color-sidebar) !important;
+}
+
+/* Hide OMV's native selection/hover bar, but keep focus indication. */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item::before,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item::after {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-list-item-ripple,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-ripple-element {
+    border-radius: 7px !important;
+}
+
+/* Maintain native drawer behavior on mobile; only dimensions change. */
+@media (max-width: 767px) {
+    #omv-workbench-navigation,
+    #omv-workbench-navigation .omv-navigation-bar {
+        width: min(255px, 85vw) !important;
+        min-width: 0 !important;
+        max-width: 85vw !important;
+    }
+}
+
+/* ================================================================
+   v1.3 — Compact tables, quiet status badges and menu wrapping
+   2026-11-06. Builds on all the v1.2 rules above.
+   ================================================================ */
+:root {
+    --qui-nav-active: var(--qui-color-text-soft);
+    --qui-nav-hover: var(--qui-color-hover);
+    --qui-header: var(--qui-color-background);
+    --qui-row-alt: var(--qui-color-row-alt);
+    --qui-green: var(--qui-color-success);
+}
+
+/* 1 — Navigation: a long label can wrap instead of clipping/overlapping
+   the next node. mat-list-item height must grow with the label. */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item {
+    height: auto !important;
+    min-height: 34px !important;
+    overflow: visible !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item > .mat-list-item-content {
+    min-height: 34px !important;
+    height: auto !important;
+    padding: 6px 10px !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .omv-text-truncate {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+    line-height: 17px !important;
+}
+/* OMV inserts a trailing flex row for the disclosure chevron. */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .omv-display-flex.omv-flex-row {
+    flex: 0 0 auto !important;
+    min-width: 16px !important;
+    margin-left: auto !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-icon {
+    align-self: center !important;
+}
+/* OMV uses mat-list-item as host; remove default list styles that add
+   a bright indicator on the selected item. */
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] {
+    background: var(--qui-nav-active) !important;
+    color: var(--qui-color-sidebar) !important;
+    border-inline: 0 !important;
+}
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active .mat-icon svg,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected .mat-icon svg,
+#omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] .mat-icon svg {
+    fill: currentColor !important;
+}
+
+/* 2 — Header: unify native and Angular toolbar backgrounds.
+   Target workbench topbar separately; keep its layout and actions. */
+omv-top-bar,
+omv-top-bar > .mat-toolbar,
+omv-top-bar > mat-toolbar.omv-top-bar.mat-primary,
+omv-top-bar .mat-toolbar-row {
+    background: var(--qui-header) !important;
+    background-color: var(--qui-header) !important;
+    color: var(--qui-color-text) !important;
+    box-shadow: none !important;
+}
+omv-top-bar > mat-toolbar.omv-top-bar.mat-primary {
+    border: 0 !important;
+    border-bottom: 1px solid var(--qui-tone-252525) !important;
+    height: 60px !important;
+    min-height: 60px !important;
+}
+omv-top-bar .hostname { color: var(--qui-color-muted) !important; font-size: 12px !important; }
+omv-top-bar .mat-divider { border-color: var(--qui-color-border-strong) !important; background: var(--qui-color-border-strong) !important; }
+/* Table action bars should no longer be blue-gray. Do not recolor
+   buttons with semantic warn/error classes. */
+omv-datatable .mat-toolbar,
+omv-datatable-toolbar .mat-toolbar,
+.omv-datatable .mat-toolbar,
+.mat-card .mat-toolbar,
+.mat-card .mat-toolbar.mat-primary,
+.mat-card .mat-toolbar.mat-accent,
+.omv-datatable-toolbar,
+.omv-datatable-header {
+    background: var(--qui-color-toolbar) !important;
+    background-color: var(--qui-color-toolbar) !important;
+    color: var(--qui-color-text) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid var(--qui-color-border-strong) !important;
+}
+
+/* 3 — Dense tables: flat header, subtle alternating rows, smaller cells. */
+.mat-table,
+table.mat-table {
+    background: var(--qui-panel) !important;
+    font-size: 12.5px !important;
+}
+.mat-header-row,
+tr.mat-header-row { height: 40px !important; min-height: 40px !important; background: var(--qui-color-surface-raised) !important; }
+.mat-row,
+tr.mat-row { height: 42px !important; min-height: 42px !important; }
+.mat-header-cell,
+.mat-cell,
+.mat-footer-cell {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    font-size: 12.5px !important;
+    line-height: 19px !important;
+    border-bottom: 1px solid var(--qui-tone-272727) !important;
+}
+.mat-header-cell { font-weight: 500 !important; color: var(--qui-tone-e8e8e8) !important; }
+.mat-row:nth-child(even) { background: var(--qui-row-alt) !important; }
+.mat-row:hover { background: var(--qui-tone-272727) !important; }
+.mat-paginator,
+.mat-paginator-container { background: var(--qui-color-surface) !important; font-size: 12px !important; }
+/* Prevent forced heights from cutting off cells that need multiple lines. */
+.mat-cell { overflow-wrap: anywhere; }
+
+/* 4 — Status and label chips: smaller, matte, readable. Angular Material
+   legacy chips as well as common OMV badge conventions. */
+.mat-chip,
+.mat-standard-chip,
+.mat-chip.mat-standard-chip,
+.omv-badge,
+.badge,
+.label,
+[class*="status-badge"] {
+    min-height: 23px !important;
+    height: auto !important;
+    padding: 3px 9px !important;
+    line-height: 16px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    letter-spacing: 0 !important;
+}
+.mat-chip.mat-primary,
+.mat-chip.mat-accent,
+.mat-chip.mat-standard-chip.mat-primary,
+.mat-chip.mat-standard-chip.mat-accent,
+.omv-badge.mat-primary,
+.omv-badge.mat-accent {
+    background: #283b4b !important;
+    color: #bed8e9 !important;
+}
+/* Success labels keep their meaning but lose the neon-green pill. */
+.mat-chip.mat-success,
+.mat-chip.success,
+.mat-chip.green,
+.mat-chip[class*="success"],
+.badge.success,
+.badge.bg-success,
+.omv-badge.success,
+.omv-badge.bg-success {
+    background: #20362a !important;
+    color: var(--qui-green) !important;
+}
+/* Status badges implemented as native Mat chips in OMV: adjust
+   palette for success only if a green Material class is present. */
+.mat-chip-list .mat-chip { margin: 2px 3px !important; }
+
+/* 5 — Compact workbench cards and forms without reducing touch targets
+   for important actions too far. */
+.mat-card { padding: 14px !important; }
+.mat-card-title { font-size: 18px !important; line-height: 24px !important; }
+.mat-card-subtitle { font-size: 12px !important; }
+.mat-card-content { margin-bottom: 10px !important; }
+.mat-card-actions { padding-top: 4px !important; padding-bottom: 4px !important; }
+.mat-form-field { font-size: 12.5px !important; }
+.mat-form-field-appearance-fill .mat-form-field-flex { padding-top: .55em !important; }
+.mat-form-field-appearance-outline .mat-form-field-infix { padding-top: .7em !important; padding-bottom: .7em !important; }
+.mat-checkbox, .mat-slide-toggle, .mat-radio-button { font-size: 12.5px !important; }
+
+/* 6 — Buttons: compact, neutral, with white icons on ordinary enabled
+   action buttons. Preserve disabled, warn and status-based colors. */
+.mat-button, .mat-stroked-button, .mat-flat-button, .mat-raised-button {
+    font-size: 12.5px !important;
+    line-height: 32px !important;
+    min-height: 32px !important;
+    border-radius: 7px !important;
+}
+.mat-icon-button { color: var(--qui-tone-e9e9e9) !important; }
+button.mat-icon-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
+button.mat-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
+button.mat-stroked-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
+button.mat-raised-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
+button.mat-flat-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon {
+    color: var(--qui-tone-ededed) !important;
+}
+button:not([disabled]):not(.mat-warn) .mat-icon svg { fill: currentColor; }
+button.mat-icon-button:not([disabled]):not(.mat-warn):hover,
+button.mat-stroked-button:not([disabled]):not(.mat-warn):hover { background: var(--qui-color-selected) !important; }
+button[disabled] .mat-icon, .mat-button-disabled .mat-icon { opacity: .45 !important; }
+/* Limit icon recoloring on active white nav item; it must stay dark. */
+#omv-workbench-navigation .mat-list-item.active .mat-icon,
+#omv-workbench-navigation .mat-list-item.selected .mat-icon { color: var(--qui-color-sidebar) !important; }
+
+/* Accessible focus and narrow device behavior remain from v1.2. */
+@media (max-width: 767px) {
+    .mat-header-cell, .mat-cell { padding-left: 8px !important; padding-right: 8px !important; }
+    #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .omv-text-truncate {
+        overflow-wrap: anywhere !important;
+    }
+}
+
+/* ================================================================
+   v1.4 — denser Qui-like OMV tables, branding and toolbar
+   Applied after v1.3; scoped to OMV 8 legacy Angular Material.
+   ================================================================ */
+:root {
+    --qui-badge-bg: var(--qui-color-badge);
+    --qui-badge-text: var(--qui-color-badge-text);
+    --qui-table-rule: var(--qui-color-hover);
+}
+
+/* Branding: retain the 255px column, smaller artwork, more breathing room. */
+#omv-workbench-navigation .omv-navigation-bar > mat-toolbar.header {
+    padding-inline: 22px !important;
+}
+#omv-workbench-navigation .omv-navigation-bar > .header .logo {
+    height: 22px !important;
+    width: 100% !important;
+    background-size: contain !important;
+    background-position: left center !important;
+}
+
+/* Low-profile badges, inspired by the graphite version labels in qui.
+   Preserve semantic warning/error/success text instead of losing meaning. */
+.mat-chip, .mat-standard-chip, .mat-chip.mat-standard-chip,
+.omv-badge, .badge, .label, [class*="status-badge"] {
+    min-height: 19px !important;
+    height: auto !important;
+    padding: 2px 7px !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    line-height: 15px !important;
+    letter-spacing: 0 !important;
+    border-radius: 6px !important;
+    border: 0 !important;
+    background: var(--qui-badge-bg) !important;
+    color: var(--qui-badge-text) !important;
+}
+.mat-chip-list .mat-chip { margin: 1px 2px !important; }
+/* Status colors are subdued while retaining their meaning. */
+.mat-chip.mat-primary, .mat-chip.mat-accent, .omv-badge.mat-primary,
+.omv-badge.mat-accent, .badge.bg-info {
+    background: #292f35 !important; color: #c4d3e1 !important;
+}
+.mat-chip.mat-success, .mat-chip.success, .mat-chip.green,
+.mat-chip[class*="success"], .badge.success, .badge.bg-success,
+.omv-badge.success, .omv-badge.bg-success {
+    background: #233329 !important; color: var(--qui-color-success-soft) !important;
+}
+.mat-chip.mat-warn, .badge.bg-warning, .badge.warning {
+    background: #3a3023 !important; color: #e4c18b !important;
+}
+.mat-chip.mat-error, .badge.bg-danger, .badge.error {
+    background: #3a272a !important; color: var(--qui-color-danger-soft) !important;
+}
+
+/* Table cards should not have an inset around the toolbar/header/table.
+   Non-table cards keep the original padding. */
+.mat-card:has(.mat-table),
+.mat-card:has(table.mat-table),
+omv-datatable .mat-card,
+omv-datatable .mat-card-content {
+    padding: 0 !important;
+}
+.mat-card:has(.mat-table) > .mat-card-content,
+.mat-card:has(table.mat-table) > .mat-card-content {
+    margin: 0 !important;
+}
+/* Toolbar controls retain a little space while the whole toolbar is flush. */
+.mat-card:has(.mat-table) .mat-toolbar,
+.mat-card:has(table.mat-table) .mat-toolbar {
+    padding-inline: 12px !important;
+    min-height: 48px !important;
+}
+
+/* Compact data density. Do not wrap long paths, device names or headings. */
+.mat-table, table.mat-table {
+    font-size: 12px !important;
+    width: max-content !important;
+    min-width: 100% !important;
+    table-layout: auto !important;
+}
+.mat-header-row, tr.mat-header-row {
+    height: 32px !important;
+    min-height: 32px !important;
+    background: var(--qui-color-header-row-alt) !important;
+}
+.mat-row, tr.mat-row {
+    height: 36px !important;
+    min-height: 36px !important;
+}
+.mat-footer-row, tr.mat-footer-row {
+    height: 36px !important;
+    min-height: 36px !important;
+}
+.mat-header-cell, .mat-cell, .mat-footer-cell,
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    padding: 5px 10px !important;
+    line-height: 18px !important;
+    height: auto !important;
+    font-size: 12px !important;
+    border-bottom: 1px solid var(--qui-table-rule) !important;
+}
+.mat-header-cell, th.mat-header-cell {
+    font-size: 11.5px !important;
+    font-weight: 500 !important;
+    padding-block: 4px !important;
+}
+/* Overflow belongs to the TABLE AREA, not the whole application. */
+.mat-card:has(.mat-table) > .mat-card-content,
+.mat-card:has(table.mat-table) > .mat-card-content,
+.mat-card:has(.mat-table) .omv-datatable-container,
+.mat-card:has(.mat-table) .omv-datatable,
+omv-datatable .mat-table-container,
+omv-datatable .omv-datatable-container,
+omv-datatable .omv-datatable-scroll,
+.omv-datatable .table-responsive {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--qui-tone-494949) var(--qui-color-sidebar);
+}
+/* Direct-child tables need their card to be the scroll container. */
+.mat-card:has(> .mat-table),
+.mat-card:has(> table.mat-table) {
+    overflow-x: auto !important;
+}
+
+/* Breadcrumb: smaller type, more space above, no vertical pipes. */
+omv-breadcrumb {
+    display: block !important;
+    margin-top: 10px !important;
+    margin-bottom: 9px !important;
+}
+omv-breadcrumb nav {
+    gap: 0 !important;
+    min-height: 24px !important;
+    align-items: center !important;
+}
+omv-breadcrumb nav a,
+omv-breadcrumb nav a.mat-subheading-2 {
+    font-size: 12.5px !important;
+    line-height: 20px !important;
+    font-weight: 400 !important;
+    border-bottom: 0 !important;
+}
+omv-breadcrumb nav a.active { font-weight: 600 !important; }
+omv-breadcrumb nav .mat-divider.mat-divider-vertical {
+    display: none !important;
+}
+/* Replace each vertical separator with a restrained chevron. */
+omv-breadcrumb nav > div.ng-star-inserted::before {
+    content: '›';
+    display: inline-block;
+    color: var(--qui-tone-686868);
+    font-size: 15px;
+    line-height: 18px;
+    margin-inline: 10px;
+    vertical-align: middle;
+}
+omv-breadcrumb nav > div.ng-star-inserted { display: inline-flex; align-items: center; }
+omv-breadcrumb nav a .mat-icon {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 18px !important;
+}
+
+/* Right-side topbar icons: smaller graphics, same 40px click targets.
+   First button is the menu toggle, so we leave it at its original size. */
+omv-top-bar .mat-toolbar > button.mat-icon-button:not(:first-child),
+omv-top-bar mat-toolbar.omv-top-bar > button.mat-icon-button:not(:first-child) {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    line-height: 40px !important;
+}
+omv-top-bar .mat-toolbar > button.mat-icon-button:not(:first-child) .mat-icon,
+omv-top-bar mat-toolbar.omv-top-bar > button.mat-icon-button:not(:first-child) .mat-icon {
+    width: 19px !important;
+    height: 19px !important;
+    font-size: 19px !important;
+    line-height: 19px !important;
+}
+/* For SVG icon glyphs, parent dimensions handle scaling. */
+omv-top-bar .mat-toolbar > button.mat-icon-button:not(:first-child) .mat-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ================================================================
+   v1.5 — correctifs ciblés à partir du DOM ngx-datatable fourni
+   ================================================================ */
+:root {
+    --qui-soft-green: var(--qui-color-success-soft);
+    --qui-soft-red: var(--qui-color-danger-soft);
+    --qui-progress-track: rgba(165, 212, 181, .10);
+}
+
+/* Le HTML réel est : mat-card > mat-card-content > omv-datatable.
+   Le padding de 16px provenait du mat-card lui-même. */
+omv-intuition-datatable-page > mat-card:has(> mat-card-content > omv-datatable),
+mat-card:has(> mat-card-content > omv-datatable) {
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+omv-intuition-datatable-page > mat-card > mat-card-content:has(> omv-datatable),
+mat-card > mat-card-content:has(> omv-datatable) {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+mat-card > mat-card-content > omv-datatable {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+/* Toolbar propre : fond uniforme, sans marge autour du datatable. */
+omv-datatable > .action-toolbar {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-bottom: 1px solid var(--qui-color-selected) !important;
+    background: var(--qui-color-surface) !important;
+}
+omv-datatable > .action-toolbar > .mat-toolbar {
+    margin: 0 !important;
+    padding: 0 12px !important;
+    min-height: 44px !important;
+    height: 44px !important;
+    background: var(--qui-color-surface) !important;
+    border: 0 !important;
+}
+
+/* OMV utilise ngx-datatable et non mat-table. */
+omv-datatable .ngx-datatable {
+    background: var(--qui-color-surface) !important;
+    font-size: 12px !important;
+}
+omv-datatable .ngx-datatable datatable-header,
+omv-datatable .ngx-datatable .datatable-header {
+    height: 35px !important; /* remplace le style inline 50px */
+    min-height: 35px !important;
+    background: var(--qui-color-header-row) !important;
+}
+omv-datatable .ngx-datatable .datatable-header .datatable-header-cell {
+    padding: 7px 10px !important;
+    font-size: 11.5px !important;
+    line-height: 19px !important;
+    white-space: nowrap !important;
+}
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row .datatable-body-cell,
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row .datatable-body-group-cell {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    line-height: 19px !important;
+    vertical-align: middle !important;
+}
+omv-datatable .ngx-datatable .datatable-body-cell-label {
+    line-height: 19px !important;
+}
+
+/* Footer discret, et surtout beaucoup moins haut. */
+omv-datatable .ngx-datatable .datatable-footer,
+omv-datatable .ngx-datatable .datatable-footer .datatable-footer-inner {
+    min-height: 32px !important;
+    height: 32px !important; /* remplace le style inline 50px */
+    background: var(--qui-color-surface) !important;
+}
+omv-datatable .ngx-datatable .datatable-footer .page-count {
+    height: 32px !important;
+    line-height: 32px !important;
+    padding: 0 10px !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    color: var(--qui-color-muted-soft) !important;
+}
+omv-datatable .ngx-datatable .datatable-footer .datatable-pager {
+    font-size: 11px !important;
+    color: var(--qui-color-muted-soft) !important;
+}
+
+/* Barres d'occupation : piste translucide, plus fines, tons doux.
+   Préserve le double texte superposé du composant OMV pour la lisibilité. */
+omv-progress-bar .omv-progress-bar {
+    height: 17px !important;
+    min-height: 17px !important;
+    border-radius: 5px !important;
+    background: var(--qui-progress-track) !important;
+    overflow: hidden !important;
+    color: #c9dacf !important;
+}
+omv-progress-bar .omv-progress-bar .omv-progress-bar-text {
+    font-size: 10.5px !important;
+    font-weight: 500 !important;
+    line-height: 17px !important;
+    padding-left: 4px !important;
+    white-space: nowrap !important;
+}
+omv-progress-bar .omv-progress-bar .omv-progress-bar-fill {
+    height: 100% !important;
+    border-radius: 5px !important;
+    background: #567c64 !important;
+    color: #f1fff5 !important;
+}
+omv-progress-bar .omv-progress-bar .omv-progress-bar-fill.warning,
+omv-progress-bar .omv-progress-bar .omv-progress-bar-fill.error {
+    background: #965357 !important;
+    color: #fff4f4 !important;
+}
+omv-progress-bar .omv-progress-bar:has(.omv-progress-bar-fill.warning),
+omv-progress-bar .omv-progress-bar:has(.omv-progress-bar-fill.error) {
+    background: rgba(233,168,176,.12) !important;
+    color: var(--qui-soft-red) !important;
+}
+
+/* Tous les pictos des boutons deviennent 19px, mais les zones de clic
+   restent à 40x40px. Le bouton hamburger reste intact. */
+button.mat-icon-button:not(.mat-fab):not(.mat-mini-fab) {
+    border-radius: 8px !important;
+    background-color: transparent;
+}
+button.mat-icon-button:not(.mat-fab):not(.mat-mini-fab) > .mat-button-wrapper > .mat-icon {
+    width: 19px !important;
+    height: 19px !important;
+    font-size: 19px !important;
+    line-height: 19px !important;
+    vertical-align: middle !important;
+}
+button.mat-icon-button > .mat-button-wrapper > .mat-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+}
+button.mat-icon-button:not([disabled]):not(.mat-button-disabled):hover {
+    background-color: var(--qui-color-selected) !important;
+}
+button.mat-icon-button .mat-button-focus-overlay,
+button.mat-icon-button .mat-button-ripple,
+button.mat-icon-button .mat-ripple-element {
+    border-radius: 8px !important;
+}
+button.mat-icon-button:not([disabled]):hover .mat-button-focus-overlay {
+    opacity: 0 !important;
+}
+button.mat-icon-button:focus-visible {
+    outline: 2px solid var(--qui-color-muted) !important;
+    outline-offset: 1px !important;
+}
+/* Ne pas recolorer les commandes désactivées ni les alertes. */
+button.mat-icon-button:disabled,
+button.mat-icon-button.mat-button-disabled {
+    background: transparent !important;
+}
+
+/* ====================================================================
+   v1.6 — Polissage qui / OMV 8
+   Basé sur la structure réelle mat-card > mat-card-content > omv-datatable
+   ==================================================================== */
+
+/* Brand : taille de l'image, pas de la zone cliquable / header */
+#omv-workbench-navigation .omv-navigation-bar > .header .logo,
+omv-navigation-bar .header .logo {
+    background-size: auto 18px !important;
+    background-position: left center !important;
+    max-height: none !important;
+}
+
+/* Carte du tableau : supprimer explicitement TOUT padding interne.
+   La marge EXTERIEURE de la carte est conservée pour aérer la page. */
+omv-intuition-datatable-page > mat-card.mat-card,
+omv-intuition-datatable-page > .mat-card,
+omv-intuition-datatable-page mat-card.mat-card:has(omv-datatable),
+mat-card.mat-card:has(> mat-card-content > omv-datatable) {
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+omv-intuition-datatable-page > mat-card.mat-card > mat-card-content.mat-card-content,
+omv-intuition-datatable-page mat-card.mat-card > .mat-card-content,
+mat-card.mat-card:has(omv-datatable) > mat-card-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+omv-intuition-datatable-page mat-card-content > omv-datatable,
+omv-intuition-datatable-page omv-datatable,
+omv-intuition-datatable-page omv-datatable > .action-toolbar,
+omv-intuition-datatable-page omv-datatable > .visible {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+omv-intuition-datatable-page omv-datatable > .action-toolbar > mat-toolbar {
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+/* Tableaux ngx-datatable : bandes alternées, même fond clair au survol. */
+omv-datatable .ngx-datatable .datatable-body .datatable-row-wrapper .datatable-body-row,
+omv-datatable .ngx-datatable .datatable-body .datatable-row-wrapper .datatable-row-group {
+    transition: background-color 120ms ease !important;
+}
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row.datatable-row-even {
+    background: var(--qui-color-surface) !important;
+}
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row.datatable-row-odd {
+    background: var(--qui-color-surface-raised) !important;
+}
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row:hover,
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row:hover .datatable-row-center,
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row:hover .datatable-row-group {
+    background: var(--qui-color-row-hover) !important;
+}
+/* Ne pas effacer la sélection (elle doit être reconnaissable). */
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row.active,
+omv-datatable .ngx-datatable .datatable-body .datatable-body-row.selected {
+    background: var(--qui-tone-303033) !important;
+}
+omv-datatable .ngx-datatable .datatable-body .datatable-body-cell {
+    background: transparent !important;
+}
+
+/* Menu déroulant des colonnes (Angular Material overlay).
+   280px max POUR LES ITEMS scrollables, sans couper le panneau lui-même. */
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox),
+.cdk-overlay-container .mat-menu-panel:has(.mat-pseudo-checkbox),
+.cdk-overlay-container .mat-menu-panel:has(mat-checkbox) {
+    background: var(--qui-color-sidebar) !important;
+    border: 1px solid var(--qui-color-border-strong) !important;
+    border-radius: 9px !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,.38) !important;
+    max-height: 280px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-content,
+.cdk-overlay-container .mat-menu-panel:has(.mat-pseudo-checkbox) .mat-menu-content,
+.cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-menu-content {
+    padding: 4px !important;
+    max-height: 272px !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--qui-tone-474747) transparent;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-item,
+.cdk-overlay-container .mat-menu-panel:has(.mat-pseudo-checkbox) .mat-menu-item,
+.cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-menu-item {
+    height: 34px !important;
+    min-height: 34px !important;
+    line-height: 34px !important;
+    padding: 0 9px !important;
+    margin: 1px 0 !important;
+    border-radius: 7px !important;
+    font-size: 12px !important;
+    color: var(--qui-tone-efefef) !important;
+    background: transparent !important;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-item:hover,
+.cdk-overlay-container .mat-menu-panel:has(.mat-pseudo-checkbox) .mat-menu-item:hover,
+.cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-menu-item:hover {
+    background: var(--qui-color-badge) !important;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-checkbox,
+.cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-checkbox {
+    font-size: 12px !important;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-checkbox-layout,
+.cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-checkbox-layout {
+    line-height: 32px !important;
+    white-space: nowrap !important;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-checkbox-inner-container,
+.cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-checkbox-inner-container {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 10px !important;
+}
+/* Certaines listes utilisent directement des checkbox sans mat-menu-item. */
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-content > .mat-checkbox,
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-content > mat-checkbox {
+    display: block !important;
+    padding: 0 9px !important;
+    border-radius: 7px !important;
+    min-height: 34px !important;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-content > .mat-checkbox:hover,
+.cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-content > mat-checkbox:hover {
+    background: var(--qui-color-badge) !important;
+}
+
+/* Variante OMV : liste de colonnes construite avec mat-selection-list. */
+.cdk-overlay-container .mat-menu-panel:has(.mat-selection-list),
+.cdk-overlay-container .mat-menu-panel:has(.mat-list-option) {
+    background: var(--qui-color-sidebar) !important;
+    border: 1px solid var(--qui-color-border-strong) !important;
+    border-radius: 9px !important;
+    max-height: 280px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+.cdk-overlay-container .mat-menu-panel:has(.mat-selection-list) .mat-menu-content,
+.cdk-overlay-container .mat-menu-panel:has(.mat-list-option) .mat-menu-content {
+    padding: 4px !important;
+}
+.cdk-overlay-container .mat-menu-panel .mat-selection-list .mat-list-option,
+.cdk-overlay-container .mat-menu-panel .mat-list-option {
+    height: 34px !important;
+    min-height: 34px !important;
+    line-height: 34px !important;
+    margin: 1px 0 !important;
+    border-radius: 7px !important;
+    font-size: 12px !important;
+}
+.cdk-overlay-container .mat-menu-panel .mat-list-option .mat-list-item-content {
+    padding: 0 9px !important;
+}
+.cdk-overlay-container .mat-menu-panel .mat-list-option:hover {
+    background: var(--qui-color-badge) !important;
+}
+.cdk-overlay-container .mat-menu-panel .mat-list-option .mat-pseudo-checkbox {
+    height: 16px !important;
+    width: 16px !important;
+    margin-right: 10px !important;
+}
+
+/* ====================================================================
+   v1.7 — réglages issus des captures du 06/11/2026
+   ==================================================================== */
+:root {
+    /* Couleurs directement reprises des références qui fournies. */
+    --qui-green: var(--qui-color-success);
+    --qui-green-subtle: rgba(0, 166, 62, .13);
+    --qui-red: var(--qui-color-danger);
+    --qui-red-subtle: rgba(255, 100, 103, .13);
+    --qui-soft-green: var(--qui-color-success);
+    --qui-soft-red: var(--qui-color-danger);
+    --qui-progress-track: var(--qui-green-subtle);
+}
+
+/* 1. Coches uniquement dans les cellules des datatables (sans modifier
+      les boutons ni les cases à cocher interactives). */
+omv-datatable .ngx-datatable .datatable-body-cell mat-icon[data-mat-icon-name="check"] {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 18px !important;
+    line-height: 18px !important;
+    vertical-align: middle !important;
+}
+omv-datatable .ngx-datatable .datatable-body-cell mat-icon[data-mat-icon-name="check"] svg {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+/* 2. Header d'actions des tableaux à 60px ; alignement au centre.
+      La ligne des noms de colonnes reste compacte. */
+omv-datatable > .action-toolbar,
+omv-intuition-datatable-page omv-datatable > .action-toolbar {
+    min-height: 60px !important;
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+omv-datatable > .action-toolbar > mat-toolbar.mat-toolbar,
+omv-intuition-datatable-page omv-datatable > .action-toolbar > mat-toolbar {
+    min-height: 60px !important;
+    height: 60px !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 12px !important;
+}
+omv-datatable > .action-toolbar > mat-toolbar > omv-datatable-actions {
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+/* 3. Vert/rouge communs : textes, tags d'état, barres d'occupation.
+      Fonds opaques seulement pour les éléments où le texte reste lisible. */
+omv-progress-bar .omv-progress-bar {
+    background-color: var(--qui-green-subtle) !important;
+    color: #b8e8c8 !important;
+}
+omv-progress-bar .omv-progress-bar .omv-progress-bar-fill:not(.warning):not(.error):not(.danger) {
+    background-color: var(--qui-green) !important;
+    color: var(--qui-color-white-short) !important;
+}
+omv-progress-bar .omv-progress-bar .omv-progress-bar-fill:is(.warning, .error, .danger),
+omv-progress-bar .omv-progress-bar .omv-progress-bar-fill.mat-warn {
+    background-color: var(--qui-red) !important;
+    color: var(--qui-color-sidebar) !important;
+}
+omv-progress-bar .omv-progress-bar:has(.omv-progress-bar-fill:is(.warning, .error, .danger, .mat-warn)) {
+    background: var(--qui-red-subtle) !important;
+    color: #ffd3d3 !important;
+}
+/* Éléments de statut : éviter de recolorer les boutons, alertes et jauges neutres. */
+.omv-badge.success, .omv-badge.bg-success,
+.badge.success, .badge.bg-success,
+.mat-chip.success, .mat-chip.mat-success {
+    background: var(--qui-green-subtle) !important;
+    color: var(--qui-green) !important;
+}
+.omv-badge.error, .omv-badge.bg-danger,
+.badge.error, .badge.bg-danger,
+.mat-chip.error, .mat-chip.mat-error {
+    background: var(--qui-red-subtle) !important;
+    color: var(--qui-red) !important;
+}
+.text-success, .omv-text-success { color: var(--qui-green) !important; }
+.text-danger, .text-error, .omv-text-danger { color: var(--qui-red) !important; }
+
+/* 4. Header principal : retirer le séparateur vertical (DOM fourni)
+      et introduire un espacement après le hostname et entre actions. */
+omv-top-bar mat-toolbar.omv-top-bar > mat-divider.mat-divider-vertical {
+    display: none !important;
+}
+omv-top-bar mat-toolbar.omv-top-bar > .hostname {
+    padding-right: 0 !important;
+    margin-right: 14px !important;
+}
+omv-top-bar mat-toolbar.omv-top-bar > button.mat-icon-button:not(:first-child) {
+    margin-left: 3px !important;
+    margin-right: 3px !important;
+}
+
+
+/* ========================================================================
+   OMV Qui Clean Dark v2.0 — Dashboard: targeted, conservative overrides
+   Based on actual OMV 8 rendered dashboard DOM.
+   IMPORTANT: never change chart flex/display/canvas sizing: Chart.js measures it.
+   ======================================================================== */
+:root {
+    --qui-dashboard-tile: var(--qui-color-surface-raised);
+    --qui-dashboard-tile-hover: var(--qui-color-selected);
+    --qui-dashboard-border: var(--qui-color-border);
+    --qui-dashboard-muted: var(--qui-color-muted);
+}
+
+/* Cards: the card shell is unchanged; only content typography/spacing. */
+omv-dashboard-page omv-dashboard-widget-grid .omv-dashboard-widget-container > mat-card.mat-card,
+omv-dashboard-page omv-dashboard-widget-filesystems-status .omv-dashboard-widget-container > mat-card.mat-card,
+omv-dashboard-page omv-dashboard-widget-value .omv-dashboard-widget-container > mat-card.mat-card {
+    padding: 20px !important;
+}
+omv-dashboard-page omv-dashboard-widget-grid .omv-dashboard-widget-container > mat-card > mat-card-title-group,
+omv-dashboard-page omv-dashboard-widget-filesystems-status .omv-dashboard-widget-container > mat-card > mat-card-title-group,
+omv-dashboard-page omv-dashboard-widget-value .omv-dashboard-widget-container > mat-card > mat-card-title-group {
+    margin: 0 0 14px !important;
+}
+omv-dashboard-page omv-dashboard-widget-grid .omv-dashboard-widget-container > mat-card > mat-card-title-group .mat-card-title,
+omv-dashboard-page omv-dashboard-widget-filesystems-status .omv-dashboard-widget-container > mat-card > mat-card-title-group .mat-card-title,
+omv-dashboard-page omv-dashboard-widget-value .omv-dashboard-widget-container > mat-card > mat-card-title-group .mat-card-title {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 20px !important;
+    letter-spacing: -0.01em;
+    margin: 0 !important;
+}
+omv-dashboard-page omv-dashboard-widget-grid .omv-dashboard-widget-container > mat-card > mat-card-content,
+omv-dashboard-page omv-dashboard-widget-filesystems-status .omv-dashboard-widget-container > mat-card > mat-card-content,
+omv-dashboard-page omv-dashboard-widget-value .omv-dashboard-widget-container > mat-card > mat-card-content {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Grid: two actual kinds of cards share the same widget component.
+   Do not style arbitrary .item descendants or nested chart legend items. */
+omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid {
+    gap: 7px !important;
+}
+omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item {
+    min-width: 0 !important;
+    border: 1px solid var(--qui-dashboard-border) !important;
+    border-radius: 7px !important;
+    background: var(--qui-dashboard-tile) !important;
+    box-shadow: none !important;
+    padding: 9px 11px !important;
+    color: var(--qui-color-text-near-white) !important;
+    box-sizing: border-box !important;
+}
+omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item.omv-cursor-pointer:hover {
+    background: var(--qui-dashboard-tile-hover) !important;
+}
+/* Active network interface: neutral card with small status cue, not full green. */
+omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item.omv-background-color-pair-success {
+    border-left: 2px solid var(--qui-green, var(--qui-color-success)) !important;
+}
+omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item .title {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 17px !important;
+    color: var(--qui-color-text-near-white-2) !important;
+    margin: 0 0 4px !important;
+}
+omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item .content {
+    color: var(--qui-dashboard-muted) !important;
+    font-size: 11px !important;
+    line-height: 16px !important;
+}
+/* Disk temperature cells retain the explicit <br> for the measurement. */
+omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item.omv-text-center .content {
+    color: var(--qui-color-text-near-white-2) !important;
+    font-size: 12px !important;
+    line-height: 18px !important;
+}
+
+/* Filesystems: only the item text/spacing; preserve OMV progress component
+   layout and its percentage text — it is the only visible percentage. */
+omv-dashboard-page omv-dashboard-widget-filesystems-status .widget-content.omv-grid {
+    gap: 12px 10px !important;
+}
+omv-dashboard-page omv-dashboard-widget-filesystems-status .widget-content > .item {
+    min-width: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+omv-dashboard-page omv-dashboard-widget-filesystems-status .item-text {
+    color: var(--qui-color-text-near-white-2) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 18px !important;
+}
+omv-dashboard-page omv-dashboard-widget-filesystems-status .item-subtext:not(omv-progress-bar) {
+    color: var(--qui-dashboard-muted) !important;
+    font-size: 11px !important;
+    line-height: 16px !important;
+}
+omv-dashboard-page omv-dashboard-widget-filesystems-status omv-progress-bar .omv-progress-bar {
+    background: rgba(0, 166, 62, .12) !important;
+    min-height: 14px !important;
+    height: 14px !important;
+}
+omv-dashboard-page omv-dashboard-widget-filesystems-status omv-progress-bar .omv-progress-bar:has(.warning) {
+    background: rgba(255, 100, 103, .12) !important;
+}
+omv-dashboard-page omv-dashboard-widget-filesystems-status omv-progress-bar .omv-progress-bar-text {
+    font-size: 10px !important;
+    line-height: 14px !important;
+}
+
+/* Charts intentionally untouched: no selectors for omv-dashboard-widget-chart.
+   The original OMV canvas, gauge value and flex sizing are preserved. */
+
+/* Short status widgets: compact typography and restrained icon, but keep
+   OMV's original flex layout and click hit-area. */
+omv-dashboard-page omv-dashboard-widget-value .widget-content > mat-icon.mat-card-avatar {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 24px !important;
+    flex: 0 0 24px !important;
+    color: var(--qui-color-muted) !important;
+}
+omv-dashboard-page omv-dashboard-widget-value .widget-content .omv-font-weight-bold {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 17px !important;
+    color: var(--qui-dashboard-muted) !important;
+}
+omv-dashboard-page omv-dashboard-widget-value .widget-content .omv-font-weight-bold + div {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 21px !important;
+    color: var(--qui-color-text) !important;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+    omv-dashboard-page omv-dashboard-widget-grid .omv-dashboard-widget-container > mat-card.mat-card,
+    omv-dashboard-page omv-dashboard-widget-filesystems-status .omv-dashboard-widget-container > mat-card.mat-card,
+    omv-dashboard-page omv-dashboard-widget-value .omv-dashboard-widget-container > mat-card.mat-card {
+        padding: 16px !important;
+    }
+}
+
+
+/* ================================================================
+   OMV Qui Clean Dark v1.11 — compact outlined forms
+   Scoped to OMV's actual intuition form page; preserve data tables,
+   sidebar and dashboard graphs. No HTML/JS changes.
+   ================================================================ */
+:root {
+    --qui-input-bg: var(--qui-color-surface-raised);
+    --qui-input-border: var(--qui-color-input-border);
+    --qui-input-hover: var(--qui-tone-515151);
+    --qui-input-focus: var(--qui-color-muted);
+    --qui-input-height: #{$input-height};
+}
+
+/* Page card: reference screenshot's discreet inner spacing. */
+omv-intuition-form-page > mat-card.mat-card:not(.alert-info) {
+    padding: 24px !important;
+    background: var(--qui-color-surface) !important;
+}
+omv-intuition-form-page > mat-card > mat-card-content.mat-card-content {
+    margin: 0 0 18px !important;
+    padding: 0 !important;
+}
+
+/* Fields arranged in two columns when this specific, mixed-input
+   form is present. Empty Angular placeholders do not take a cell. */
+@media (min-width: 800px) {
+    omv-intuition-form-page form:has(> p > omv-form-textarea):has(> p > omv-form-number-input) {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 18px !important;
+        align-items: start;
+    }
+    omv-intuition-form-page form:has(> p > omv-form-textarea):has(> p > omv-form-number-input) > p {
+        min-width: 0;
+        margin: 0 !important;
+    }
+    omv-intuition-form-page form:has(> p > omv-form-textarea):has(> p > omv-form-number-input) > p:empty {
+        display: none !important;
+    }
+    /* Name, multiline paths, combined minimum-free-space fields and
+       final options need the full row. Selects occupy half-width. */
+    omv-intuition-form-page form:has(> p > omv-form-textarea):has(> p > omv-form-number-input) > p:has(> omv-form-text-input),
+    omv-intuition-form-page form:has(> p > omv-form-textarea):has(> p > omv-form-number-input) > p:has(> omv-form-textarea),
+    omv-intuition-form-page form:has(> p > omv-form-textarea):has(> p > omv-form-number-input) > p:has(omv-form-number-input) {
+        grid-column: 1 / -1;
+    }
+}
+@media (max-width: 799px) {
+    omv-intuition-form-page form > p { margin: 0 0 12px !important; }
+}
+
+omv-intuition-form-page form omv-form-text-input,
+omv-intuition-form-page form omv-form-number-input,
+omv-intuition-form-page form omv-form-select,
+omv-intuition-form-page form omv-form-textarea {
+    min-width: 0 !important;
+    width: 100%;
+}
+omv-intuition-form-page form .mat-form-field.mat-form-field-appearance-legacy {
+    width: 100%;
+    color: var(--qui-color-text-near-white) !important;
+    font-size: 12.5px !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy > .mat-form-field-wrapper {
+    position: relative;
+    padding: 20px 0 0 !important;
+    margin: 0 !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-flex {
+    box-sizing: border-box;
+    min-height: var(--qui-input-height);
+    align-items: center !important;
+    padding: 0 11px !important;
+    background: var(--qui-input-bg) !important;
+    border: 1px solid var(--qui-input-border) !important;
+    border-radius: 8px !important;
+    transition: border-color .15s ease, background-color .15s ease;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-flex:hover {
+    border-color: var(--qui-input-hover) !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy.mat-focused .mat-form-field-flex {
+    border-color: var(--qui-input-focus) !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy.mat-form-field-invalid .mat-form-field-flex {
+    border-color: var(--qui-color-danger) !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-infix {
+    border: 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+}
+/* OMV uses floating Material labels. Pin them above the new box
+   rather than leaving them inside the control. */
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-label-wrapper {
+    position: absolute !important;
+    top: -30px !important;
+    left: -11px !important;
+    height: 19px !important;
+    width: calc(100% + 22px) !important;
+    overflow: visible !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-label {
+    position: static !important;
+    display: block !important;
+    transform: none !important;
+    width: 100% !important;
+    font-size: 12px !important;
+    line-height: 18px !important;
+    font-weight: 500 !important;
+    color: var(--qui-tone-d9d9d9) !important;
+    opacity: 1 !important;
+    pointer-events: none;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy input.mat-input-element,
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-trigger {
+    min-height: 34px !important;
+    line-height: 34px !important;
+    font-size: 12.5px !important;
+    font-weight: 400 !important;
+    color: var(--qui-tone-f1f1f1) !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-arrow {
+    color: var(--qui-tone-aaa) !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-value,
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-placeholder {
+    font-size: 12.5px !important;
+    line-height: 34px !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy textarea.mat-input-element {
+    min-height: 88px !important;
+    padding: 9px 0 !important;
+    line-height: 18px !important;
+    font-size: 12px !important;
+    resize: vertical;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy:has(textarea) .mat-form-field-flex {
+    align-items: start !important;
+}
+/* Help text keeps its natural height; errors remain visible. */
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+    position: static !important;
+    margin: 5px 0 0 !important;
+    padding: 0 !important;
+    font-size: 10.5px !important;
+    line-height: 15px !important;
+    color: var(--qui-tone-9d9d9d) !important;
+    overflow: visible !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-hint {
+    color: var(--qui-color-muted-soft) !important;
+    font-size: 10.5px !important;
+    line-height: 15px !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-error {
+    color: var(--qui-color-danger) !important;
+    font-size: 11px !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-flex {
+    background: var(--qui-color-row-alt) !important;
+    border-color: var(--qui-color-border-strong) !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy.mat-form-field-disabled input {
+    opacity: .75 !important;
+    -webkit-text-fill-color: var(--qui-tone-d4d4d4) !important;
+}
+/* Keep the original OMV validation and submission behavior. */
+omv-intuition-form-page > mat-card > mat-card-actions.mat-card-actions {
+    padding: 16px 0 0 !important;
+    margin: 0 !important;
+    border-top: 1px solid var(--qui-tone-2a2a2a) !important;
+    gap: 8px;
+}
+omv-intuition-form-page > mat-card > mat-card-actions .mat-flat-button {
+    min-height: 34px;
+    line-height: 34px !important;
+    border-radius: 7px !important;
+    font-size: 12px !important;
+    padding: 0 14px !important;
+    background: var(--qui-color-badge) !important;
+    color: var(--qui-tone-eee) !important;
+}
+omv-intuition-form-page > mat-card > mat-card-actions omv-submit-button .mat-flat-button:not(:disabled) {
+    background: var(--qui-color-text-soft) !important;
+    color: var(--qui-color-sidebar) !important;
+}
+omv-intuition-form-page > mat-card > mat-card-actions .mat-flat-button:disabled {
+    background: var(--qui-color-selected) !important;
+    color: var(--qui-tone-777) !important;
+}
+
+/* ==============================================================
+   OMV Qui Clean Dark v1.12 — form spacing / neutral selections
+   Additive overrides on top of v1.11. Scoped to legacy OMV forms
+   and Angular Material select overlays; dashboard charts untouched.
+   ============================================================== */
+:root {
+    --qui-neutral: var(--qui-color-text-soft);
+    --qui-muted: var(--qui-color-muted);
+    --qui-neutral-panel: var(--qui-color-surface-raised);
+    --qui-neutral-hover: var(--qui-color-selected);
+    --qui-neutral-stroke: var(--qui-color-border-neutral);
+}
+
+/* More breathing room BETWEEN fields (without modifying table rows). */
+@media (min-width: 800px) {
+    omv-intuition-form-page form:has(> p > omv-form-textarea):has(> p > omv-form-number-input) {
+        column-gap: 22px !important;
+        row-gap: 24px !important;
+    }
+}
+omv-intuition-form-page form > p {
+    margin-bottom: 20px !important;
+}
+@media (max-width: 799px) {
+    omv-intuition-form-page form > p { margin-bottom: 20px !important; }
+}
+/* Lift the label, and separate it from its field border. */
+omv-intuition-form-page form .mat-form-field-appearance-legacy > .mat-form-field-wrapper {
+    padding-top: 29px !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-label-wrapper {
+    top: -36px !important;
+}
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-label {
+    line-height: 18px !important;
+}
+/* Hints remain legible but less crowded under their controls. */
+omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+    margin-top: 7px !important;
+}
+
+/* Neutral, compact multi-select dropdowns (form fields, e.g. Filesystems).
+   These overlays are rendered outside the form, under cdk-overlay-container. */
+.cdk-overlay-container .mat-select-panel:has(.mat-option .mat-pseudo-checkbox) {
+    background: var(--qui-color-overlay) !important;
+    color: var(--qui-color-text) !important;
+    width: min(340px, calc(100vw - 32px)) !important;
+    max-width: min(340px, calc(100vw - 32px)) !important;
+    max-height: 280px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    border: 1px solid var(--qui-color-border-strong) !important;
+    border-radius: 9px !important;
+    box-shadow: 0 12px 30px rgba(0,0,0,.38) !important;
+    padding: 4px !important;
+    box-sizing: border-box !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--qui-color-border-control) transparent;
+}
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option {
+    box-sizing: border-box !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    margin: 1px 0 !important;
+    border-radius: 7px !important;
+    background: transparent !important;
+    color: var(--qui-tone-f0f0f0) !important;
+    font-size: 12px !important;
+}
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option:hover:not(.mat-option-disabled),
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option.mat-active {
+    background: var(--qui-color-selected) !important;
+}
+/* Selection should NOT turn the whole line blue. */
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option.mat-selected,
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option.mat-selected .mat-option-text {
+    color: var(--qui-color-text) !important;
+}
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option-text {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+/* Material's pseudo-checkbox: gray border, white check, no blue fill. */
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-pseudo-checkbox {
+    width: 16px !important;
+    height: 16px !important;
+    border-color: var(--qui-tone-8c8c8c) !important;
+    border-radius: 3px !important;
+    background: transparent !important;
+    color: var(--qui-color-text) !important;
+    margin-right: 12px !important;
+}
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
+    background: var(--qui-color-input-border) !important;
+    border-color: var(--qui-color-text-soft) !important;
+}
+.cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-pseudo-checkbox-checked::after {
+    color: var(--qui-color-white) !important;
+    border-color: var(--qui-color-white) !important;
+}
+/* Standard mat-checkbox controls, on forms and option lists. */
+omv-intuition-form-page .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+omv-intuition-form-page .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+    background: var(--qui-color-text-soft) !important;
+}
+omv-intuition-form-page .mat-checkbox-checkmark-path {
+    stroke: var(--qui-color-sidebar) !important;
+}
+omv-intuition-form-page .mat-checkbox-frame { border-color: var(--qui-tone-999) !important; }
+/* Reset neutral badges and info chips; do not override error/success. */
+.mat-chip.mat-primary:not(.success):not(.error):not(.warning),
+.mat-chip.mat-accent:not(.success):not(.error):not(.warning),
+.omv-badge.mat-primary:not(.success):not(.error),
+.omv-badge.mat-accent:not(.success):not(.error),
+.badge.bg-info {
+    color: var(--qui-color-badge-text) !important;
+    background: var(--qui-color-badge) !important;
+    border-color: transparent !important;
+}
+
