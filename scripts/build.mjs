@@ -1,24 +1,15 @@
-import {readFile, mkdir, writeFile} from 'node:fs/promises';
+import {readFile, readdir, mkdir, writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import * as sass from 'sass';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const source = path.join(root, 'src/omv-theme-qui.scss');
-const output = path.join(root, 'dist/omv-theme-qui.css');
+const sourceDir = path.join(root, 'src/scss');
+const outputDir = path.join(root, 'dist/css');
 const marker = '/* MARKER */';
 
 const pkg = JSON.parse(
     await readFile(path.join(root, 'package.json'), 'utf8')
-);
-
-const result = await sass.compileAsync(
-    source,
-    {
-        style: 'expanded',
-        sourceMap: false,
-        loadPaths: [path.join(root, 'src')]
-    }
 );
 
 const author = typeof pkg.author === 'string' ? pkg.author : pkg.author?.name ?? 'Unknown';
@@ -49,13 +40,31 @@ const banner = `
 
 `;
 
-const markerCount = result.css.split(marker).length - 1;
+const entries = (await readdir(sourceDir, {withFileTypes: true}))
+    .filter((entry) => entry.isFile() && path.extname(entry.name) === '.scss')
+    .sort((a, b) => a.name.localeCompare(b.name));
 
-if (markerCount !== 1) {
-    throw new Error(`Expected exactly one ${marker} in ${source}, found ${markerCount}`);
+if (entries.length === 0) {
+    throw new Error(`No SCSS entry files found in ${sourceDir}`);
 }
 
-await mkdir(path.dirname(output), {recursive: true});
-await writeFile(output, result.css.replace(marker, banner), 'utf8');
+await mkdir(outputDir, {recursive: true});
 
-console.log(`✓ Built omv-theme-qui.css v${pkg.version}`);
+await Promise.all(entries.map(async (entry) => {
+    const source = path.join(sourceDir, entry.name);
+    const outputName = `${path.basename(entry.name, '.scss')}.css`;
+    const output = path.join(outputDir, outputName);
+    const result = await sass.compileAsync(source, {
+        style: 'expanded',
+        sourceMap: false,
+        loadPaths: [sourceDir]
+    });
+    const markerCount = result.css.split(marker).length - 1;
+
+    if (markerCount !== 1) {
+        throw new Error(`Expected exactly one ${marker} in ${source}, found ${markerCount}`);
+    }
+
+    await writeFile(output, result.css.replace(marker, banner), 'utf8');
+    console.log(`✓ Built ${outputName} v${pkg.version}`);
+}));

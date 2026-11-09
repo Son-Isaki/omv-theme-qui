@@ -1,5 +1,8 @@
 @use "sass:map";
-@use "variables" as v;
+
+$dark-palette: () !default;
+$light-palette: () !default;
+$card-radius: 10px !default;
 
 @mixin emit-theme($palette, $mode) {
   @each $name, $value in $palette {
@@ -7,14 +10,14 @@
   }
 
   --qui-bg: var(--qui-color-background);
-  --qui-sidebar: var(--qui-color-sidebar);
+  --qui-sidebar: var(--qui-color-surface);
   --qui-panel: var(--qui-color-surface);
   --qui-panel-hover: var(--qui-color-surface-raised);
   --qui-border: var(--qui-color-border);
   --qui-text: var(--qui-color-text);
   --qui-muted: var(--qui-color-muted);
   --qui-selection: var(--qui-color-selected);
-  --qui-radius: #{v.$card-radius};
+  --qui-radius: #{$card-radius};
   --qui-green: var(--qui-color-success);
   --qui-red: var(--qui-color-danger);
   --qui-green-subtle: rgba(0, 166, 62, .13);
@@ -35,16 +38,16 @@
 
 // Default to dark before Angular attaches a theme class.
 :root {
-  @include emit-theme(v.$dark-palette, dark);
+  @include emit-theme($dark-palette, dark);
 }
 
 // Angular Material/OMV applies the selected theme class to <body>.
 body.omv-dark-theme {
-  @include emit-theme(v.$dark-palette, dark);
+  @include emit-theme($dark-palette, dark);
 }
 
 // OMV's light mode may have an explicit class or no dark class at all.
 body.omv-light-theme,
 body:not(.omv-dark-theme):not(.omv-dark) {
-  @include emit-theme(v.$light-palette, light);
+  @include emit-theme($light-palette, light);
 }

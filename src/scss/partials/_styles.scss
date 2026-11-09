@@ -1,7 +1,6 @@
-/* MARKER */
-
-@use "variables" as *;
-@use "themes";
+$sidebar-width: 255px !default;
+$navigation-row-height: 36px !default;
+$input-height: 36px !default;
 
 /* Canvas + original OMV workbench layout */
 html, body, omv-root, omv-workbench-layout,
@@ -44,7 +43,7 @@ body { font-family: 'Geist', 'Inter', sans-serif; }
     padding-right: 10px;
 }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-icon {
-    color: var(--qui-tone-c5c5c5) !important;
+    color: var(--qui-color-text-soft) !important;
 }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item:hover {
     background: var(--qui-color-selected) !important;
@@ -109,7 +108,7 @@ omv-breadcrumb nav a { color: var(--qui-muted) !important; }
 omv-breadcrumb nav a.active,
 omv-breadcrumb nav a:hover { color: var(--qui-text) !important; }
 omv-breadcrumb nav a:hover:not(.active) {
-    border-bottom-color: var(--qui-tone-777) !important;
+    border-bottom-color: var(--qui-color-muted-soft) !important;
 }
 omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 
@@ -137,10 +136,10 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 }
 .omv-navigation-page .mat-card:hover {
     background: var(--qui-panel-hover) !important;
-    border-color: var(--qui-tone-3c3c3c) !important;
+    border-color: var(--qui-color-border-strong) !important;
 }
 .omv-navigation-page .mat-card .mat-icon {
-    color: var(--qui-tone-d4d4d4) !important;
+    color: var(--qui-color-text-soft) !important;
 }
 .omv-navigation-page .mat-card .omv-text-center {
     color: var(--qui-text) !important;
@@ -156,7 +155,7 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
     background: transparent !important;
     color: var(--qui-text) !important;
 }
-.mat-row:hover { background: var(--qui-color-row-hover) !important; }
+.mat-row:hover { background: var(--qui-color-selected) !important; }
 .mat-cell, .mat-header-cell, .mat-footer-cell,
 .mat-row, .mat-header-row, .mat-footer-row {
     border-bottom-color: var(--qui-border) !important;
@@ -169,14 +168,14 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 .mat-form-field-label, .mat-select-placeholder { color: var(--qui-muted) !important; }
 .mat-input-element, .mat-select-value { color: var(--qui-text) !important; }
 .mat-form-field-appearance-fill .mat-form-field-flex {
-    background: var(--qui-tone-222) !important;
+    background: var(--qui-color-surface-raised) !important;
     border-radius: 7px 7px 0 0;
 }
 .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: var(--qui-tone-535353) !important;
+    color: var(--qui-color-border-strong) !important;
 }
 .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: var(--qui-tone-c8c8c8) !important;
+    color: var(--qui-color-text-soft) !important;
 }
 /* Do not override .mat-error, .mat-warn, disabled/validation colors */
 
@@ -185,7 +184,7 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 .mat-raised-button, .mat-menu-item {
     border-radius: 7px !important;
 }
-.mat-stroked-button { border-color: var(--qui-color-border-control) !important; }
+.mat-stroked-button { border-color: var(--qui-color-border-strong) !important; }
 .mat-raised-button { box-shadow: none !important; }
 .mat-menu-item { color: var(--qui-text) !important; }
 .mat-menu-item:hover:not([disabled]) { background: var(--qui-color-selected) !important; }
@@ -194,12 +193,12 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 /* Consistent scrollbar where supported */
 #omv-workbench-navigation, .omv-scrollable-y {
     scrollbar-width: thin;
-    scrollbar-color: var(--qui-tone-454545) transparent;
+    scrollbar-color: var(--qui-color-border-strong) transparent;
 }
 
 /* Keyboard accessibility: always keep focus visible */
 :where(button, a, .mat-list-item, .mat-card):focus-visible {
-    outline: 2px solid var(--qui-tone-bfbfbf) !important;
+    outline: 2px solid var(--qui-color-text-soft) !important;
     outline-offset: 2px;
 }
 
@@ -224,7 +223,7 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
     --qui-nav-width: #{$sidebar-width};
     --qui-nav-height: #{$navigation-row-height};
     --qui-nav-active: var(--qui-color-text-soft);
-    --qui-nav-hover: var(--qui-color-hover);
+    --qui-nav-hover: var(--qui-color-selected);
 }
 
 /* Match qui's 255px sidebar; override OMV's native 18.75rem. */
@@ -273,7 +272,7 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
     border-radius: 7px !important;
     background-color: transparent !important;
     box-shadow: none !important;
-    color: var(--qui-color-text-near-white) !important;
+    color: var(--qui-color-text) !important;
 }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .mat-list-item-content {
     padding: 0 10px !important;
@@ -286,7 +285,7 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
     font-size: 18px !important;
     margin-right: 10px !important;
     flex: 0 0 18px;
-    color: var(--qui-tone-d7d7d7) !important;
+    color: var(--qui-color-text-soft) !important;
 }
 /* Arrow icons at the far right should not have left-item spacing. */
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item .omv-flex-row > .mat-icon {
@@ -308,7 +307,7 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 /* Hover: charcoal pill. Active takes precedence over hover. */
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item:not(.active):not(.selected):hover {
     background: var(--qui-nav-hover) !important;
-    color: var(--qui-color-white-short) !important;
+    color: var(--qui-color-text) !important;
 }
 
 /* Active: light pill with near-black text and icons, as on qui. */
@@ -316,18 +315,18 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected,
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] {
     background: var(--qui-nav-active) !important;
-    color: var(--qui-color-sidebar) !important;
+    color: var(--qui-color-surface) !important;
     border: 0 !important;
 }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active .omv-text-truncate,
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected .omv-text-truncate,
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] .omv-text-truncate {
-    color: var(--qui-color-sidebar) !important;
+    color: var(--qui-color-surface) !important;
 }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active .mat-icon,
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected .mat-icon,
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] .mat-icon {
-    color: var(--qui-color-sidebar) !important;
+    color: var(--qui-color-surface) !important;
 }
 
 /* Hide OMV's native selection/hover bar, but keep focus indication. */
@@ -357,9 +356,9 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
    ================================================================ */
 :root {
     --qui-nav-active: var(--qui-color-text-soft);
-    --qui-nav-hover: var(--qui-color-hover);
+    --qui-nav-hover: var(--qui-color-selected);
     --qui-header: var(--qui-color-background);
-    --qui-row-alt: var(--qui-color-row-alt);
+    --qui-row-alt: var(--qui-color-surface);
     --qui-green: var(--qui-color-success);
 }
 
@@ -403,7 +402,7 @@ omv-breadcrumb .mat-divider { border-color: var(--qui-border) !important; }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.selected,
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item[aria-current="page"] {
     background: var(--qui-nav-active) !important;
-    color: var(--qui-color-sidebar) !important;
+    color: var(--qui-color-surface) !important;
     border-inline: 0 !important;
 }
 #omv-workbench-navigation omv-navigation-bar-list-item > .mat-list-item.active .mat-icon svg,
@@ -425,7 +424,7 @@ omv-top-bar .mat-toolbar-row {
 }
 omv-top-bar > mat-toolbar.omv-top-bar.mat-primary {
     border: 0 !important;
-    border-bottom: 1px solid var(--qui-tone-252525) !important;
+    border-bottom: 1px solid var(--qui-color-selected) !important;
     height: 60px !important;
     min-height: 60px !important;
 }
@@ -441,8 +440,8 @@ omv-datatable-toolbar .mat-toolbar,
 .mat-card .mat-toolbar.mat-accent,
 .omv-datatable-toolbar,
 .omv-datatable-header {
-    background: var(--qui-color-toolbar) !important;
-    background-color: var(--qui-color-toolbar) !important;
+    background: var(--qui-color-surface) !important;
+    background-color: var(--qui-color-surface) !important;
     color: var(--qui-color-text) !important;
     box-shadow: none !important;
     border-bottom: 1px solid var(--qui-color-border-strong) !important;
@@ -467,11 +466,11 @@ tr.mat-row { height: 42px !important; min-height: 42px !important; }
     padding-right: 10px !important;
     font-size: 12.5px !important;
     line-height: 19px !important;
-    border-bottom: 1px solid var(--qui-tone-272727) !important;
+    border-bottom: 1px solid var(--qui-color-selected) !important;
 }
-.mat-header-cell { font-weight: 500 !important; color: var(--qui-tone-e8e8e8) !important; }
+.mat-header-cell { font-weight: 500 !important; color: var(--qui-color-text) !important; }
 .mat-row:nth-child(even) { background: var(--qui-row-alt) !important; }
-.mat-row:hover { background: var(--qui-tone-272727) !important; }
+.mat-row:hover { background: var(--qui-color-selected) !important; }
 .mat-paginator,
 .mat-paginator-container { background: var(--qui-color-surface) !important; font-size: 12px !important; }
 /* Prevent forced heights from cutting off cells that need multiple lines. */
@@ -541,13 +540,13 @@ tr.mat-row { height: 42px !important; min-height: 42px !important; }
     min-height: 32px !important;
     border-radius: 7px !important;
 }
-.mat-icon-button { color: var(--qui-tone-e9e9e9) !important; }
+.mat-icon-button { color: var(--qui-color-text) !important; }
 button.mat-icon-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
 button.mat-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
 button.mat-stroked-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
 button.mat-raised-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon,
 button.mat-flat-button:not([disabled]):not(.mat-warn):not(.mat-button-disabled) .mat-icon {
-    color: var(--qui-tone-ededed) !important;
+    color: var(--qui-color-text) !important;
 }
 button:not([disabled]):not(.mat-warn) .mat-icon svg { fill: currentColor; }
 button.mat-icon-button:not([disabled]):not(.mat-warn):hover,
@@ -555,7 +554,7 @@ button.mat-stroked-button:not([disabled]):not(.mat-warn):hover { background: var
 button[disabled] .mat-icon, .mat-button-disabled .mat-icon { opacity: .45 !important; }
 /* Limit icon recoloring on active white nav item; it must stay dark. */
 #omv-workbench-navigation .mat-list-item.active .mat-icon,
-#omv-workbench-navigation .mat-list-item.selected .mat-icon { color: var(--qui-color-sidebar) !important; }
+#omv-workbench-navigation .mat-list-item.selected .mat-icon { color: var(--qui-color-surface) !important; }
 
 /* Accessible focus and narrow device behavior remain from v1.2. */
 @media (max-width: 767px) {
@@ -570,9 +569,9 @@ button[disabled] .mat-icon, .mat-button-disabled .mat-icon { opacity: .45 !impor
    Applied after v1.3; scoped to OMV 8 legacy Angular Material.
    ================================================================ */
 :root {
-    --qui-badge-bg: var(--qui-color-badge);
-    --qui-badge-text: var(--qui-color-badge-text);
-    --qui-table-rule: var(--qui-color-hover);
+    --qui-badge-bg: var(--qui-color-selected);
+    --qui-badge-text: var(--qui-color-text-soft);
+    --qui-table-rule: var(--qui-color-selected);
 }
 
 /* Branding: retain the 255px column, smaller artwork, more breathing room. */
@@ -649,7 +648,7 @@ omv-datatable .mat-card-content {
 .mat-header-row, tr.mat-header-row {
     height: 32px !important;
     min-height: 32px !important;
-    background: var(--qui-color-header-row-alt) !important;
+    background: var(--qui-color-surface-raised) !important;
 }
 .mat-row, tr.mat-row {
     height: 36px !important;
@@ -687,7 +686,7 @@ omv-datatable .omv-datatable-scroll,
     overflow-x: auto !important;
     max-width: 100% !important;
     scrollbar-width: thin;
-    scrollbar-color: var(--qui-tone-494949) var(--qui-color-sidebar);
+    scrollbar-color: var(--qui-color-border-strong) var(--qui-color-surface);
 }
 /* Direct-child tables need their card to be the scroll container. */
 .mat-card:has(> .mat-table),
@@ -721,7 +720,7 @@ omv-breadcrumb nav .mat-divider.mat-divider-vertical {
 omv-breadcrumb nav > div.ng-star-inserted::before {
     content: '›';
     display: inline-block;
-    color: var(--qui-tone-686868);
+    color: var(--qui-color-muted-soft);
     font-size: 15px;
     line-height: 18px;
     margin-inline: 10px;
@@ -809,7 +808,7 @@ omv-datatable .ngx-datatable datatable-header,
 omv-datatable .ngx-datatable .datatable-header {
     height: 35px !important; /* remplace le style inline 50px */
     min-height: 35px !important;
-    background: var(--qui-color-header-row) !important;
+    background: var(--qui-color-surface-raised) !important;
 }
 omv-datatable .ngx-datatable .datatable-header .datatable-header-cell {
     padding: 7px 10px !important;
@@ -981,12 +980,12 @@ omv-datatable .ngx-datatable .datatable-body .datatable-body-row.datatable-row-o
 omv-datatable .ngx-datatable .datatable-body .datatable-body-row:hover,
 omv-datatable .ngx-datatable .datatable-body .datatable-body-row:hover .datatable-row-center,
 omv-datatable .ngx-datatable .datatable-body .datatable-body-row:hover .datatable-row-group {
-    background: var(--qui-color-row-hover) !important;
+    background: var(--qui-color-selected) !important;
 }
 /* Ne pas effacer la sélection (elle doit être reconnaissable). */
 omv-datatable .ngx-datatable .datatable-body .datatable-body-row.active,
 omv-datatable .ngx-datatable .datatable-body .datatable-body-row.selected {
-    background: var(--qui-tone-303033) !important;
+    background: var(--qui-color-border-strong) !important;
 }
 omv-datatable .ngx-datatable .datatable-body .datatable-body-cell {
     background: transparent !important;
@@ -997,7 +996,7 @@ omv-datatable .ngx-datatable .datatable-body .datatable-body-cell {
 .cdk-overlay-container .mat-menu-panel:has(.mat-checkbox),
 .cdk-overlay-container .mat-menu-panel:has(.mat-pseudo-checkbox),
 .cdk-overlay-container .mat-menu-panel:has(mat-checkbox) {
-    background: var(--qui-color-sidebar) !important;
+    background: var(--qui-color-surface) !important;
     border: 1px solid var(--qui-color-border-strong) !important;
     border-radius: 9px !important;
     box-shadow: 0 12px 30px rgba(0,0,0,.38) !important;
@@ -1012,7 +1011,7 @@ omv-datatable .ngx-datatable .datatable-body .datatable-body-cell {
     max-height: 272px !important;
     overflow-y: auto !important;
     scrollbar-width: thin;
-    scrollbar-color: var(--qui-tone-474747) transparent;
+    scrollbar-color: var(--qui-color-border-strong) transparent;
 }
 .cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-item,
 .cdk-overlay-container .mat-menu-panel:has(.mat-pseudo-checkbox) .mat-menu-item,
@@ -1024,13 +1023,13 @@ omv-datatable .ngx-datatable .datatable-body .datatable-body-cell {
     margin: 1px 0 !important;
     border-radius: 7px !important;
     font-size: 12px !important;
-    color: var(--qui-tone-efefef) !important;
+    color: var(--qui-color-text) !important;
     background: transparent !important;
 }
 .cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-item:hover,
 .cdk-overlay-container .mat-menu-panel:has(.mat-pseudo-checkbox) .mat-menu-item:hover,
 .cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-menu-item:hover {
-    background: var(--qui-color-badge) !important;
+    background: var(--qui-color-selected) !important;
 }
 .cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-checkbox,
 .cdk-overlay-container .mat-menu-panel:has(mat-checkbox) .mat-checkbox {
@@ -1057,13 +1056,13 @@ omv-datatable .ngx-datatable .datatable-body .datatable-body-cell {
 }
 .cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-content > .mat-checkbox:hover,
 .cdk-overlay-container .mat-menu-panel:has(.mat-checkbox) .mat-menu-content > mat-checkbox:hover {
-    background: var(--qui-color-badge) !important;
+    background: var(--qui-color-selected) !important;
 }
 
 /* Variante OMV : liste de colonnes construite avec mat-selection-list. */
 .cdk-overlay-container .mat-menu-panel:has(.mat-selection-list),
 .cdk-overlay-container .mat-menu-panel:has(.mat-list-option) {
-    background: var(--qui-color-sidebar) !important;
+    background: var(--qui-color-surface) !important;
     border: 1px solid var(--qui-color-border-strong) !important;
     border-radius: 9px !important;
     max-height: 280px !important;
@@ -1087,7 +1086,7 @@ omv-datatable .ngx-datatable .datatable-body .datatable-body-cell {
     padding: 0 9px !important;
 }
 .cdk-overlay-container .mat-menu-panel .mat-list-option:hover {
-    background: var(--qui-color-badge) !important;
+    background: var(--qui-color-selected) !important;
 }
 .cdk-overlay-container .mat-menu-panel .mat-list-option .mat-pseudo-checkbox {
     height: 16px !important;
@@ -1154,12 +1153,12 @@ omv-progress-bar .omv-progress-bar {
 }
 omv-progress-bar .omv-progress-bar .omv-progress-bar-fill:not(.warning):not(.error):not(.danger) {
     background-color: var(--qui-green) !important;
-    color: var(--qui-color-white-short) !important;
+    color: var(--qui-color-text) !important;
 }
 omv-progress-bar .omv-progress-bar .omv-progress-bar-fill:is(.warning, .error, .danger),
 omv-progress-bar .omv-progress-bar .omv-progress-bar-fill.mat-warn {
     background-color: var(--qui-red) !important;
-    color: var(--qui-color-sidebar) !important;
+    color: var(--qui-color-surface) !important;
 }
 omv-progress-bar .omv-progress-bar:has(.omv-progress-bar-fill:is(.warning, .error, .danger, .mat-warn)) {
     background: var(--qui-red-subtle) !important;
@@ -1247,7 +1246,7 @@ omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item {
     background: var(--qui-dashboard-tile) !important;
     box-shadow: none !important;
     padding: 9px 11px !important;
-    color: var(--qui-color-text-near-white) !important;
+    color: var(--qui-color-text) !important;
     box-sizing: border-box !important;
 }
 omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item.omv-cursor-pointer:hover {
@@ -1261,7 +1260,7 @@ omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item .t
     font-size: 12px !important;
     font-weight: 600 !important;
     line-height: 17px !important;
-    color: var(--qui-color-text-near-white-2) !important;
+    color: var(--qui-color-text) !important;
     margin: 0 0 4px !important;
 }
 omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item .content {
@@ -1271,7 +1270,7 @@ omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item .c
 }
 /* Disk temperature cells retain the explicit <br> for the measurement. */
 omv-dashboard-page omv-dashboard-widget-grid .widget-content.omv-grid > .item.omv-text-center .content {
-    color: var(--qui-color-text-near-white-2) !important;
+    color: var(--qui-color-text) !important;
     font-size: 12px !important;
     line-height: 18px !important;
 }
@@ -1288,7 +1287,7 @@ omv-dashboard-page omv-dashboard-widget-filesystems-status .widget-content > .it
     background: transparent !important;
 }
 omv-dashboard-page omv-dashboard-widget-filesystems-status .item-text {
-    color: var(--qui-color-text-near-white-2) !important;
+    color: var(--qui-color-text) !important;
     font-size: 12px !important;
     font-weight: 500 !important;
     line-height: 18px !important;
@@ -1353,8 +1352,8 @@ omv-dashboard-page omv-dashboard-widget-value .widget-content .omv-font-weight-b
    ================================================================ */
 :root {
     --qui-input-bg: var(--qui-color-surface-raised);
-    --qui-input-border: var(--qui-color-input-border);
-    --qui-input-hover: var(--qui-tone-515151);
+    --qui-input-border: var(--qui-color-border-strong);
+    --qui-input-hover: var(--qui-color-border-strong);
     --qui-input-focus: var(--qui-color-muted);
     --qui-input-height: #{$input-height};
 }
@@ -1406,7 +1405,7 @@ omv-intuition-form-page form omv-form-textarea {
 }
 omv-intuition-form-page form .mat-form-field.mat-form-field-appearance-legacy {
     width: 100%;
-    color: var(--qui-color-text-near-white) !important;
+    color: var(--qui-color-text) !important;
     font-size: 12.5px !important;
 }
 omv-intuition-form-page form .mat-form-field-appearance-legacy > .mat-form-field-wrapper {
@@ -1457,7 +1456,7 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-l
     font-size: 12px !important;
     line-height: 18px !important;
     font-weight: 500 !important;
-    color: var(--qui-tone-d9d9d9) !important;
+    color: var(--qui-color-text-soft) !important;
     opacity: 1 !important;
     pointer-events: none;
 }
@@ -1470,10 +1469,10 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-trigg
     line-height: 34px !important;
     font-size: 12.5px !important;
     font-weight: 400 !important;
-    color: var(--qui-tone-f1f1f1) !important;
+    color: var(--qui-color-text) !important;
 }
 omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-arrow {
-    color: var(--qui-tone-aaa) !important;
+    color: var(--qui-color-muted) !important;
 }
 omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-value,
 omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-select-placeholder {
@@ -1497,7 +1496,7 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-s
     padding: 0 !important;
     font-size: 10.5px !important;
     line-height: 15px !important;
-    color: var(--qui-tone-9d9d9d) !important;
+    color: var(--qui-color-muted) !important;
     overflow: visible !important;
 }
 omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-hint {
@@ -1510,18 +1509,18 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-error {
     font-size: 11px !important;
 }
 omv-intuition-form-page form .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-flex {
-    background: var(--qui-color-row-alt) !important;
+    background: var(--qui-color-surface) !important;
     border-color: var(--qui-color-border-strong) !important;
 }
 omv-intuition-form-page form .mat-form-field-appearance-legacy.mat-form-field-disabled input {
     opacity: .75 !important;
-    -webkit-text-fill-color: var(--qui-tone-d4d4d4) !important;
+    -webkit-text-fill-color: var(--qui-color-text-soft) !important;
 }
 /* Keep the original OMV validation and submission behavior. */
 omv-intuition-form-page > mat-card > mat-card-actions.mat-card-actions {
     padding: 16px 0 0 !important;
     margin: 0 !important;
-    border-top: 1px solid var(--qui-tone-2a2a2a) !important;
+    border-top: 1px solid var(--qui-color-selected) !important;
     gap: 8px;
 }
 omv-intuition-form-page > mat-card > mat-card-actions .mat-flat-button {
@@ -1530,16 +1529,16 @@ omv-intuition-form-page > mat-card > mat-card-actions .mat-flat-button {
     border-radius: 7px !important;
     font-size: 12px !important;
     padding: 0 14px !important;
-    background: var(--qui-color-badge) !important;
-    color: var(--qui-tone-eee) !important;
+    background: var(--qui-color-selected) !important;
+    color: var(--qui-color-text) !important;
 }
 omv-intuition-form-page > mat-card > mat-card-actions omv-submit-button .mat-flat-button:not(:disabled) {
     background: var(--qui-color-text-soft) !important;
-    color: var(--qui-color-sidebar) !important;
+    color: var(--qui-color-surface) !important;
 }
 omv-intuition-form-page > mat-card > mat-card-actions .mat-flat-button:disabled {
     background: var(--qui-color-selected) !important;
-    color: var(--qui-tone-777) !important;
+    color: var(--qui-color-muted-soft) !important;
 }
 
 /* ==============================================================
@@ -1552,7 +1551,7 @@ omv-intuition-form-page > mat-card > mat-card-actions .mat-flat-button:disabled 
     --qui-muted: var(--qui-color-muted);
     --qui-neutral-panel: var(--qui-color-surface-raised);
     --qui-neutral-hover: var(--qui-color-selected);
-    --qui-neutral-stroke: var(--qui-color-border-neutral);
+    --qui-neutral-stroke: var(--qui-color-border-strong);
 }
 
 /* More breathing room BETWEEN fields (without modifying table rows). */
@@ -1586,7 +1585,7 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-s
 /* Neutral, compact multi-select dropdowns (form fields, e.g. Filesystems).
    These overlays are rendered outside the form, under cdk-overlay-container. */
 .cdk-overlay-container .mat-select-panel:has(.mat-option .mat-pseudo-checkbox) {
-    background: var(--qui-color-overlay) !important;
+    background: var(--qui-color-surface) !important;
     color: var(--qui-color-text) !important;
     width: min(340px, calc(100vw - 32px)) !important;
     max-width: min(340px, calc(100vw - 32px)) !important;
@@ -1599,7 +1598,7 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-s
     padding: 4px !important;
     box-sizing: border-box !important;
     scrollbar-width: thin;
-    scrollbar-color: var(--qui-color-border-control) transparent;
+    scrollbar-color: var(--qui-color-border-strong) transparent;
 }
 .cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option {
     box-sizing: border-box !important;
@@ -1610,7 +1609,7 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-s
     margin: 1px 0 !important;
     border-radius: 7px !important;
     background: transparent !important;
-    color: var(--qui-tone-f0f0f0) !important;
+    color: var(--qui-color-text) !important;
     font-size: 12px !important;
 }
 .cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-option:hover:not(.mat-option-disabled),
@@ -1631,19 +1630,19 @@ omv-intuition-form-page form .mat-form-field-appearance-legacy .mat-form-field-s
 .cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-pseudo-checkbox {
     width: 16px !important;
     height: 16px !important;
-    border-color: var(--qui-tone-8c8c8c) !important;
+    border-color: var(--qui-color-muted-soft) !important;
     border-radius: 3px !important;
     background: transparent !important;
     color: var(--qui-color-text) !important;
     margin-right: 12px !important;
 }
 .cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
-    background: var(--qui-color-input-border) !important;
+    background: var(--qui-color-border-strong) !important;
     border-color: var(--qui-color-text-soft) !important;
 }
 .cdk-overlay-container .mat-select-panel:has(.mat-pseudo-checkbox) .mat-pseudo-checkbox-checked::after {
-    color: var(--qui-color-white) !important;
-    border-color: var(--qui-color-white) !important;
+    color: var(--qui-color-text) !important;
+    border-color: var(--qui-color-text) !important;
 }
 /* Standard mat-checkbox controls, on forms and option lists. */
 omv-intuition-form-page .mat-checkbox-checked.mat-accent .mat-checkbox-background,
@@ -1651,17 +1650,17 @@ omv-intuition-form-page .mat-checkbox-checked.mat-primary .mat-checkbox-backgrou
     background: var(--qui-color-text-soft) !important;
 }
 omv-intuition-form-page .mat-checkbox-checkmark-path {
-    stroke: var(--qui-color-sidebar) !important;
+    stroke: var(--qui-color-surface) !important;
 }
-omv-intuition-form-page .mat-checkbox-frame { border-color: var(--qui-tone-999) !important; }
+omv-intuition-form-page .mat-checkbox-frame { border-color: var(--qui-color-muted-soft) !important; }
 /* Reset neutral badges and info chips; do not override error/success. */
 .mat-chip.mat-primary:not(.success):not(.error):not(.warning),
 .mat-chip.mat-accent:not(.success):not(.error):not(.warning),
 .omv-badge.mat-primary:not(.success):not(.error),
 .omv-badge.mat-accent:not(.success):not(.error),
 .badge.bg-info {
-    color: var(--qui-color-badge-text) !important;
-    background: var(--qui-color-badge) !important;
+    color: var(--qui-color-text-soft) !important;
+    background: var(--qui-color-selected) !important;
     border-color: transparent !important;
 }
 
